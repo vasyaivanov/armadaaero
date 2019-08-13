@@ -20,23 +20,22 @@ class Template extends React.Component {
     }
     this.handleOpenArticle = this.handleOpenArticle.bind(this)
     this.handleCloseArticle = this.handleCloseArticle.bind(this)
+
+    this.playbackId = 'JMZYiLsCO006ffi9Or67JHh01Oew01wlXFh';
+    this.videoUrl = `https://stream.mux.com/${this.playbackId}.m3u8`;
+    this.posterUrl = `https://image.mux.com/${this.playbackId}/thumbnail.png?width=800&height=600&fit_mode=crop`;
   }
 
   playVideo () {
-    const playbackId = 'JMZYiLsCO006ffi9Or67JHh01Oew01wlXFh';
-    const url = `https://stream.mux.com/${playbackId}.m3u8`;
 
     const video = this.videoRef;
+    const hls = new Hls();
 
     // HLS.js-specific setup code
     if (Hls.isSupported()) {
-      const hls = new Hls();
-      hls.loadSource(url);
+      hls.loadSource(this.videoUrl);
       hls.attachMedia(video);
       hls.on(Hls.Events.MANIFEST_PARSED, () => video.play());
-    } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
-      video.src = url;
-      video.addEventListener('loadedmetadata', () => video.play());
     }
   }
 
@@ -112,12 +111,13 @@ class Template extends React.Component {
     const siteDescription = this.props.data.site.siteMetadata.description
 
     const videoOptions = {
-      autoplay: true,
+      autoPlay: true,
       controls: false,
       muted: true,
       loop: true,
       preload: 'auto',
-      poster: 'https://image.mux.com/JMZYiLsCO006ffi9Or67JHh01Oew01wlXFh/thumbnail.png?width=500&height=200&fit_mode=pad'
+      poster: this.posterUrl,
+      src: this.videoUrl
     }
 
 
@@ -145,7 +145,7 @@ class Template extends React.Component {
 
         <div className="video-background">
           <div className="video-foreground">
-            <video ref={(videoRef) => this.videoRef = videoRef} {...videoOptions} />
+            <video id="videobg" ref={(videoRef) => this.videoRef = videoRef} {...videoOptions} />
           </div>
         </div>
       </div>
