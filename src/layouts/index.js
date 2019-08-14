@@ -21,7 +21,7 @@ class Template extends React.Component {
     this.handleOpenArticle = this.handleOpenArticle.bind(this)
     this.handleCloseArticle = this.handleCloseArticle.bind(this)
 
-    this.playbackId = 'JMZYiLsCO006ffi9Or67JHh01Oew01wlXFh';
+    this.playbackId = 'bou00Z2KeAUP1RbF01UFG01avDNogxjhY1v';
     this.videoUrl = `https://stream.mux.com/${this.playbackId}.m3u8`;
     this.posterUrl = `https://image.mux.com/${this.playbackId}/thumbnail.png?width=800&height=600&fit_mode=crop`;
   }
