@@ -120,7 +120,6 @@ class Template extends React.Component {
       src: this.videoUrl
     }
 
-
     return (
       <div className={`body ${this.state.loading} ${this.state.isArticleVisible ? 'is-article-visible' : ''}`}>
         <Helmet>
